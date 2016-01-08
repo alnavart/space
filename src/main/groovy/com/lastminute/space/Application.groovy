@@ -7,6 +7,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication
 public class Application {
 
     public static void main(String[] args) {
+        System.setProperty("spring.devtools.restart.enabled", "true");
+        System.setProperty("spring.devtools.restart.exclude", "static/js/stop.js,static/js/sockjs*");
         SpringApplication.run(Application.class, args)
     }
 

@@ -49,7 +49,7 @@ var chat = {
             chat.gui.email = $("#email").val();
             var gravatar = chat.gui.getGravatar(chat.gui.email);
             $("#login").hide();
-            $("#chat").show();
+            $("#application").show();
             $("#avatar").attr('src', gravatar);
             chat.comms.connect(chat.gui.receiveMessage, chat.gui.receiveEvent, chat.gui.email);
         },

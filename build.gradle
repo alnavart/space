@@ -35,12 +35,17 @@ dependencies {
     compile "org.springframework.boot:spring-boot-starter-web:${springBootVersion}"
     compile "org.springframework.boot:spring-boot-starter-websocket:${springBootVersion}"
     compile "org.springframework.boot:spring-boot-starter-actuator:${springBootVersion}"
-    compile("org.springframework:spring-messaging")
+    compile "org.springframework.boot:spring-boot-devtools:${springBootVersion}"
+    compile "org.springframework:spring-messaging"
     compile "org.codehaus.groovy:groovy-all:${groovyVersion}"
 
     testCompile 'org.springframework.boot:spring-boot-starter-test'
     testCompile 'org.spockframework:spock-core:1.0-groovy-2.4'
     testCompile 'cglib:cglib-nodep:3.1'
+}
+
+bootRun {
+    addResources = true
 }
 
 task wrapper(type: Wrapper) {
