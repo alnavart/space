@@ -1,3 +1,6 @@
+version = '0.0.1-SNAPSHOT'
+description 'The spring boot workshop space'
+
 buildscript {
     ext {
         springBootVersion = '1.3.1.RELEASE'
@@ -7,6 +10,7 @@ buildscript {
     }
     dependencies {
         classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+        classpath "io.spring.gradle:dependency-management-plugin:0.4.0.RELEASE"
     }
 }
 
@@ -15,27 +19,40 @@ apply plugin: 'eclipse'
 apply plugin: 'groovy'
 apply plugin: 'idea'
 apply plugin: 'spring-boot'
+apply plugin: "io.spring.dependency-management"
 
 jar {
     baseName = 'space'
-    version = '0.0.1-SNAPSHOT'
 }
 sourceCompatibility = 1.7
 targetCompatibility = 1.7
 
 repositories {
     mavenCentral()
+    jcenter()
+    maven { url 'https://repo.spring.io/release/' }
+    maven { url "http://repo.spring.io/libs-snapshot-local" }
+    maven { url "http://repo.spring.io/libs-milestone-local" }
+    maven { url "http://repo.spring.io/libs-release-local" }
 }
 
 String groovyVersion = '2.4.3'
-springBootVersion = '1.3.1.RELEASE'
+
+dependencyManagement {
+    imports {
+        mavenBom 'org.springframework.cloud:spring-cloud-starter-parent:Brixton.M4'
+    }
+}
 
 dependencies {
-    compile "org.springframework.boot:spring-boot-starter-integration:${springBootVersion}"
-    compile "org.springframework.boot:spring-boot-starter-web:${springBootVersion}"
-    compile "org.springframework.boot:spring-boot-starter-websocket:${springBootVersion}"
-    compile "org.springframework.boot:spring-boot-starter-actuator:${springBootVersion}"
-    compile "org.springframework.boot:spring-boot-devtools:${springBootVersion}"
+    compile "org.springframework.boot:spring-boot-starter-integration"
+    compile "org.springframework.boot:spring-boot-starter-web"
+    compile "org.springframework.boot:spring-boot-starter-websocket"
+    compile "org.springframework.boot:spring-boot-starter-actuator"
+    compile "org.springframework.boot:spring-boot-devtools"
+    compile 'org.springframework.cloud:spring-cloud-starter-config'
+    compile 'org.springframework.cloud:spring-cloud-starter-eureka'
+    compile "org.springframework.cloud:spring-cloud-starter-eureka-server"
     compile "org.springframework:spring-messaging"
     compile "org.codehaus.groovy:groovy-all:${groovyVersion}"
 
