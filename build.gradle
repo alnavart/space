@@ -54,6 +54,7 @@ dependencies {
     compile 'org.springframework.cloud:spring-cloud-starter-eureka'
     compile "org.springframework.cloud:spring-cloud-starter-eureka-server"
     compile "org.springframework.cloud:spring-cloud-starter-zuul"
+    compile "org.springframework.cloud:spring-cloud-starter-hystrix-dashboard"
     compile "org.springframework:spring-messaging"
     compile "org.codehaus.groovy:groovy-all:${groovyVersion}"
 
