@@ -1,10 +1,9 @@
 server:
-  port: ${PORT:8761}
+  port: ${PORT:8762}
 
-eureka:
-  client:
-    registerWithEureka: false
-    fetchRegistry: true
-    server:
-      waitTimeInMsWhenSyncEmpty: 0
-
+spring:
+  application:
+    name: space
+  devtools:
+    restart.enabled: true
+    restart.exclude: "static/js/stop.js,static/js/sockjs*"
