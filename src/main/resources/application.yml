@@ -1,9 +1,22 @@
+info.build:
+  name: ${name}
+  description: ${description}
+  version: ${version}
+
 server:
   port: ${PORT:8762}
 
 spring:
   application:
-    name: space
+    name: ${name}
   devtools:
     restart.enabled: true
     restart.exclude: "static/js/stop.js,static/js/sockjs*"
+
+eureka.instance:
+  appGroupName: 'workshop'
+  homePageUrl: /
+  component: ${description}
+  appname: ${name}
+  description: ${description}
+  version: ${version}

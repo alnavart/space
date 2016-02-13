@@ -55,6 +55,7 @@ dependencies {
     compile "org.springframework.cloud:spring-cloud-starter-zuul"
     compile "org.springframework.cloud:spring-cloud-starter-hystrix-dashboard"
     compile "org.springframework:spring-messaging"
+    compile 'org.springframework.cloud:spring-cloud-starter-feign'
     compile "org.codehaus.groovy:groovy-all:${groovyVersion}"
 
     testCompile 'org.springframework.boot:spring-boot-starter-test'
@@ -62,10 +63,12 @@ dependencies {
     testCompile 'cglib:cglib-nodep:3.1'
 }
 
-bootRun {
-    addResources = true
-}
-
 task wrapper(type: Wrapper) {
     gradleVersion = '2.9'
+}
+
+processResources {
+    filesMatching("**/application.yml") {
+        expand(project.properties)
+    }
 }

@@ -1,5 +1,5 @@
 package com.lastminute.space.controller
-import com.lastminute.space.domain.Message
+import com.lastminute.space.domain.ChatMessage
 import com.lastminute.space.repository.ParticipantRepository
 import com.lastminute.space.service.MessageService
 import groovy.json.JsonBuilder
@@ -23,8 +23,8 @@ class ChatController {
     }
 
     @MessageMapping("/message")
-    public void chatMessage(@Payload Message message) {
-        Message mess = new Message(
+    public void chatMessage(@Payload ChatMessage message) {
+        ChatMessage mess = new ChatMessage(
                 email: message.email,
                 text: message.text
         )
