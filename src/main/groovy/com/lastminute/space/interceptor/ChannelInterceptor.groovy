@@ -17,10 +17,10 @@ class ChannelInterceptor extends ChannelInterceptorAdapter {
                 StompCommand.SEND.equals(headers.getCommand())) {
             String participant = participantRepository.getParticipant(headers.getSessionId())
 
-            /** rules **
-            if (!participant.endsWith("lastminute.com")) { //rumbo.com or bravofly.com
+            /** rules **/
+            if (!(participant.endsWith("@lastminute.com") || participant.endsWith("@rumbo.com") || participant.endsWith("@bravofly.com"))) {
                 throw new IllegalArgumentException("No permission")
-            }            **/
+            }
         }
         return message
     }

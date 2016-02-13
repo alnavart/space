@@ -1,6 +1,7 @@
 var chat = {
     comms : {
         stompClient: null,
+        connected: false,
 
         connect: function(rcvMessage, rcvEvent, email) {
             var socket = new SockJS('/message');
@@ -10,39 +11,46 @@ var chat = {
                 chat.comms.stompClient.subscribe('/topic/chat', rcvMessage, {});
                 chat.comms.stompClient.subscribe('/topic/events', rcvEvent, {});
                 chat.comms.getAllParticipants();
+                chat.comms.connected = true;
             }, function(error){
-                alert(error.headers.message);
+                chat.gui.connectionError(error);
+                console.log('Error while connect: ' + error);
             });
         },
 
         disconnect: function() {
             if (chat.comms.stompClient != null) {
                 chat.comms.stompClient.disconnect();
+                chat.comms.connected = false;
                 console.log("Disconnected");
             }
         },
 
         sendMessage: function(email, text) {
             chat.comms.stompClient.send("/app/message", {}, JSON.stringify({'text': text, 'email': email }));
+            console.log('Send message from email' + email + ' with text' + text);
         },
 
         getAllParticipants: function () {
             $.getJSON("participants", function (data) {
-                console.log(data);
-                chat.gui.showAllParticipants(data);
+                console.log('COMMS participants: ' + data);
+                if(chat.comms.connected == true)
+                {
+                    chat.gui.showAllParticipants(data);
+                }
             })
                 .done(function () {
-                    console.log("done");
+                    console.log("All participants done");
                 })
                 .fail(function () {
-                    console.log("error");
+                    console.log("All participants error");
                 })
                 .always(function () {
-                    console.log("complete");
+                    console.log("All participants complete");
                 })
         }
     },
-    /////////////////////////////////////////////////////////////////////////
+    ////////////////////////////// GUI ///////////////////////////////////////////
     gui : {
         email: "",
         login: function(){
@@ -51,18 +59,39 @@ var chat = {
             $("#login").hide();
             $("#application").show();
             $("#avatar").attr('src', gravatar);
-            chat.comms.connect(chat.gui.receiveMessage, chat.gui.receiveEvent, chat.gui.email);
+            chat.comms.connect(chat.gui.receiveMessage, chat.gui.receiveEvent, chat.gui.email)
+            console.log('GUI: login complete');
+        },
+
+        connectionError: function (error) {
+            chat.gui.exit();
+            if (error.headers.message.indexOf('IllegalArgumentException')  != -1) {
+                alert("No permission! Check your email address and try again");
+            } else {
+                alert("Unexpected error while try to connect");
+            }
+        },
+
+        exit: function(){
+            chat.comms.disconnect();
+            $("#participants").empty();
+            $("#history").empty();
+            $("#application").hide();
+            $("#login").show();
+            console.log('Exit: looking to the floor.');
         },
 
         receiveMessage: function(message) {
             var jsonMsg = JSON.parse(message.body);
             chat.gui.showMessage(jsonMsg.email, jsonMsg.text);
+            console.log('GUI: receive message' + message);
         },
 
         sendMessage: function(){
             var text = $("#text").val();
             $("#text").val("");
             chat.comms.sendMessage(chat.gui.email, text);
+            console.log('GUI: send message');
         },
 
         showMessage: function(email, text){
@@ -75,27 +104,29 @@ var chat = {
             }
             $("#history").append(message);
             $("#history").scrollTop ($("#history")[0].scrollHeight);
+            console.log('GUI: show message from:' + email);
         },
 
         receiveEvent: function(event) {
             var jsonEvent = JSON.parse(event.body);
             if (jsonEvent.type == "CONNECT") {
+                console.log('GUI: receive CONNECT event: ' + event);
                 chat.gui.addParticipant(jsonEvent.email);
             } else {
                 chat.gui.removeParticipant(jsonEvent.email);
             }
-
+            console.log('GUI: receive event: ' + event);
         },
 
         addParticipant: function(email){
-            console.log(email);
+            console.log('GUI: Add participant: ' + email);
             var gravatar = chat.gui.getGravatar(email, 40);
             var participant = $("<span class='participant' data-email='" + email + "'><img title='" + email + "' src='" + gravatar + "'/><span>");
             $("#participants").append(participant);
         },
 
         showAllParticipants: function(emails){
-            console.log(emails);
+            console.log('GUI: Show all participants: ' + emails);
             var index;
             for (index = 0; index < emails.length; ++index) {
                 console.log(emails[index]);
@@ -104,6 +135,7 @@ var chat = {
         },
 
         removeParticipant: function(email){
+            console.log('GUI: Remove participant: ' + email);
             $(".participant[data-email='" + email + "']").remove();
         },
 
@@ -126,5 +158,9 @@ $( document ).ready(function() {
     $("#messageForm").submit(function( event ) {
         event.preventDefault();
         chat.gui.sendMessage();
+    });
+
+    $("#exit-button").click(function() {
+        chat.gui.exit();
     });
 });

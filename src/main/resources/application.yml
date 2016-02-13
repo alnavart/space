@@ -1,7 +1,7 @@
 info.build:
-  name: ${name}
-  description: ${description}
-  version: ${version}
+  name: space
+  description: 'The spring boot workshop space'
+  version: '0.0.1-SNAPSHOT'
 
 server:
   port: ${PORT:8762}
@@ -16,7 +16,6 @@ spring:
 eureka.instance:
   appGroupName: 'workshop'
   homePageUrl: /
-  component: ${description}
-  appname: ${name}
-  description: ${description}
-  version: ${version}
+  appname: space
+  description: 'The spring boot workshop space'
+  version: '0.0.1-SNAPSHOT'
