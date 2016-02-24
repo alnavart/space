@@ -8,7 +8,7 @@ server:
 
 spring:
   application:
-    name: ${name}
+    name: space
   devtools:
     restart.enabled: true
     restart.exclude: "static/js/stop.js,static/js/sockjs*"
