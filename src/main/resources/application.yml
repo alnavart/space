@@ -13,9 +13,13 @@ spring:
     restart.enabled: true
     restart.exclude: "static/js/stop.js,static/js/sockjs*"
 
-eureka.instance:
-  appGroupName: 'workshop'
-  homePageUrl: /
-  appname: space
-  description: 'The spring boot workshop space'
-  version: '0.0.1-SNAPSHOT'
+eureka:
+  instance:
+    appGroupName: 'workshop'
+    homePageUrl: /
+    appname: space
+    description: 'The spring boot workshop space'
+    version: '0.0.1-SNAPSHOT'
+  client:
+    serviceUrl:
+      defaultZone: http://discovery:8761/eureka/
