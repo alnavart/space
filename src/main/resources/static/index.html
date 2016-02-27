@@ -8,45 +8,7 @@
     <script src="js/sockjs-0.3.4.js"></script>
     <script src="js/stomp.js"></script>
     <script src="js/appspace.js"></script>
-    <style>
-        #login {
-            margin-top: 200px;
-        }
-
-        #application {
-            margin-top: 10px;
-            display: none;
-        }
-
-        #chat {
-            margin-top: 50px;
-        }
-
-        #history {
-            width: 100%;
-            height: 300px;
-            border: 1px solid black;
-            background-color: white;
-            overflow-y: scroll;
-        }
-
-        .center {
-            text-align: center;
-        }
-
-        .right {
-            text-align: right;
-        }
-
-        .message {
-            margin: 5px;
-            font-size: 18px;
-        }
-
-        #participants {
-            height: 50px;
-        }
-    </style>
+    <link rel="stylesheet" href="css/space.css">
 </head>
 <body>
 <div class="container">
@@ -67,34 +29,47 @@
         </form>
     </div>
     <div id="application">
-        <div id="tittle">
-
+        <div id="tittle" class="page-header">
+            <div id="exit" class="pull-right">
+                <p>Exit
+                    <button id="exit-button" type="button" class="close" aria-hidden="true">
+                        &times;
+                    </button>
+                </p>
+            </div>
             <h1>Spring boot space</h1>
-
-            <div id="exit">
-                <button id="exit-button">Exit</button>
-            </div>
-
         </div>
 
-        <div id="chat" class="jumbotron">
+        <div class="col-sm-8">
+            <div id="chat" class="panel panel-default">
+                <div class="panel-heading">
+                    <h2><img id="avatar"/>Looking at the sky:</h2>
+                </div>
+                <div class="panel-body">
 
-            <h2><img id="avatar"/>Looking at the sky:</h2>
+                    <div id="participants" class="right">
+                    </div>
 
-            <div id="participants" class="right">
+                    <div id="history">
+                    </div>
+
+                    <form id="messageForm">
+                        <input id="text" type="text" placeholder="Send your message" class="form-control">
+                    </form>
+
+                </div>
             </div>
-
-            <div id="history">
-            </div>
-
-            <form id="messageForm">
-                <input id="text" type="text" placeholder="Send your message" class="form-control">
-            </form>
         </div>
 
-        <div id="space" class="jumbotron">
-            <h2>Detected spacecrafts:</h2>
-            <div id="spacecrafts">
+        <div class="col-sm-4">
+            <div id="space" class="panel panel-default">
+                <div class="panel-heading">
+                    <h2>Detected spacecrafts:</h2>
+                </div>
+                <div class="panel-body">
+                    <div id="spacecrafts">
+                    </div>
+                </div>
             </div>
         </div>
     </div>
