@@ -7,7 +7,7 @@
 
     <script src="js/sockjs-0.3.4.js"></script>
     <script src="js/stomp.js"></script>
-    <script src="js/chat.js"></script>
+    <script src="js/appspace.js"></script>
     <style>
         #login {
             margin-top: 200px;
@@ -90,6 +90,12 @@
             <form id="messageForm">
                 <input id="text" type="text" placeholder="Send your message" class="form-control">
             </form>
+        </div>
+
+        <div id="space" class="jumbotron">
+            <h2>Detected spacecrafts:</h2>
+            <div id="spacecrafts">
+            </div>
         </div>
     </div>
 </div>

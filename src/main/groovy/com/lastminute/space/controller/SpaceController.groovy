@@ -1,9 +1,9 @@
 package com.lastminute.space.controller;
 
 import com.lastminute.space.communication.HearingAid;
-import com.lastminute.space.domain.Message;
+import com.lastminute.space.domain.Message
+import com.lastminute.space.repository.SpaceRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -14,11 +14,11 @@ public class SpaceController {
     @Autowired
     HearingAid hearingAid
     @Autowired
-    private DiscoveryClient discoveryClient
+    SpaceRepository spaceRepository
 
-    @RequestMapping("/all-services")
-    List services() {
-         discoveryClient.getServices()
+    @RequestMapping("/all-spacecrafts")
+    List allSpacecrafts() {
+         spaceRepository.getAllSpacecrafts()
     }
 
     @RequestMapping("/answer")
