@@ -119,9 +119,9 @@ var appspace = {
             var gravatar = appspace.gui.getGravatar(email);
             var message;
             if (email != appspace.gui.email) {
-                message = $("<div class='message'><span><img title='" + email + "' src='" + gravatar + "'/>&nbsp;<span>" + text + "</span></div>");
+                message = $("<div class='message'><span><img class='img-circle img-in-chat' title='" + email + "' src='" + gravatar + "'/>&nbsp;<span>" + text + "</span></div>");
             } else {
-                message = $("<div class='message right'><span>" + text + "&nbsp;</span><span><img title='" + email + "' src='" + gravatar + "'/></div>");
+                message = $("<div class='message right'><span>" + text + "&nbsp;</span><span><img class='img-circle img-in-chat' title='" + email + "' src='" + gravatar + "'/></div>");
             }
             $("#history").append(message);
             $("#history").scrollTop ($("#history")[0].scrollHeight);
@@ -174,7 +174,7 @@ var appspace = {
 
         addSpacecraft: function(spacecraft){
             console.log('GUI: Add spacecraft: ' + spacecraft);
-            var spacecraftElement = $("<p class='spacecraft' data-spacecraft='" + spacecraft + "'>" + spacecraft + "</p>");
+            var spacecraftElement = $("<h1><span class='spacecraft label label-primary' data-spacecraft='" + spacecraft + "'>" + spacecraft + "</span></h1>");
             $("#spacecrafts").append(spacecraftElement);
         },
 
