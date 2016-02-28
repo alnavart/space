@@ -1,4 +1,4 @@
-package com.lastminute.space.repository
+package org.demo.space.repository
 
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.cloud.client.discovery.DiscoveryClient

@@ -1,4 +1,4 @@
-package com.lastminute.space.repository
+package org.demo.space.repository
 
 import org.springframework.stereotype.Service
 

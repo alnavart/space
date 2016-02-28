@@ -1,8 +1,8 @@
-package com.lastminute.space.controller
-import com.lastminute.space.domain.ChatMessage
-import com.lastminute.space.repository.ParticipantRepository
-import com.lastminute.space.service.MessageService
+package org.demo.space.controller
+import org.demo.space.domain.ChatMessage
 import groovy.json.JsonBuilder
+import org.demo.space.repository.ParticipantRepository
+import org.demo.space.service.MessageService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.messaging.handler.annotation.MessageMapping
 import org.springframework.messaging.handler.annotation.Payload

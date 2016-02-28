@@ -1,7 +1,7 @@
-package com.lastminute.space.communication;
+package org.demo.space.communication;
 
 
-import com.lastminute.space.domain.Message;
+import org.demo.space.domain.Message;
 import org.springframework.cloud.netflix.feign.FeignClient;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;

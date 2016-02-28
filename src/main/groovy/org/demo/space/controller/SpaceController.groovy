@@ -1,8 +1,8 @@
-package com.lastminute.space.controller;
+package org.demo.space.controller;
 
-import com.lastminute.space.communication.HearingAid;
-import com.lastminute.space.domain.Message
-import com.lastminute.space.repository.SpaceRepository;
+import org.demo.space.communication.HearingAid
+import org.demo.space.repository.SpaceRepository
+import org.demo.space.domain.Message;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;

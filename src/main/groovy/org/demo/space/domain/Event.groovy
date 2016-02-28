@@ -1,4 +1,4 @@
-package com.lastminute.space.domain
+package org.demo.space.domain
 
 class Event {
     String type

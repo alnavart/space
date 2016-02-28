@@ -1,8 +1,8 @@
-package com.lastminute.space.event
+package org.demo.space.event
 
-import com.lastminute.space.domain.Event
-import com.lastminute.space.repository.ParticipantRepository
-import com.lastminute.space.service.MessageService
+import org.demo.space.domain.Event
+import org.demo.space.repository.ParticipantRepository
+import org.demo.space.service.MessageService
 import org.springframework.context.ApplicationEvent
 import org.springframework.context.ApplicationListener
 import org.springframework.messaging.simp.SimpMessageHeaderAccessor

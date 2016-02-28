@@ -1,7 +1,7 @@
-package com.lastminute.space.service
+package org.demo.space.service
 
-import com.lastminute.space.domain.Event
-import com.lastminute.space.domain.ChatMessage
+import org.demo.space.domain.ChatMessage
+import org.demo.space.domain.Event
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.messaging.simp.SimpMessagingTemplate
 import org.springframework.stereotype.Service

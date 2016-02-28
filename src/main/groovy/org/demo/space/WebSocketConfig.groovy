@@ -1,9 +1,9 @@
-package com.lastminute.space
+package org.demo.space
 
-import com.lastminute.space.event.PresenceEventListener
-import com.lastminute.space.interceptor.ChannelInterceptor
-import com.lastminute.space.repository.ParticipantRepository
-import com.lastminute.space.service.MessageService
+import org.demo.space.event.PresenceEventListener
+import org.demo.space.interceptor.ChannelInterceptor
+import org.demo.space.repository.ParticipantRepository
+import org.demo.space.service.MessageService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration

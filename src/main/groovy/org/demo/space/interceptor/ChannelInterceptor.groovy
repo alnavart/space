@@ -1,6 +1,6 @@
-package com.lastminute.space.interceptor
+package org.demo.space.interceptor
 
-import com.lastminute.space.repository.ParticipantRepository
+import org.demo.space.repository.ParticipantRepository
 import org.springframework.messaging.Message
 import org.springframework.messaging.MessageChannel
 import org.springframework.messaging.simp.stomp.StompCommand
