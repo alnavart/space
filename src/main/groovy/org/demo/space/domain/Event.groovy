@@ -2,6 +2,6 @@ package org.demo.space.domain
 
 class Event {
     String type
-    String email
+    String data
     Long timeStamp = System.currentTimeMillis()
 }

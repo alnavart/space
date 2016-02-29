@@ -27,7 +27,7 @@ public class PresenceEventListener implements ApplicationListener<ApplicationEve
         participantRepository.addParticipant(headers.getSessionId(), email)
         Event chatEvent = new Event(
                 type: "CONNECT",
-                email: email
+                data: email
         )
         messageService.sendEvent(chatEvent)
 
@@ -41,7 +41,7 @@ public class PresenceEventListener implements ApplicationListener<ApplicationEve
 
         Event chatEvent = new Event(
                 type: "DISCONNECT",
-                email: email
+                data: email
         )
 
         messageService.sendEvent(chatEvent)

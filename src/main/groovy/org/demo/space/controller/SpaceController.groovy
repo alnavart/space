@@ -1,8 +1,8 @@
 package org.demo.space.controller;
 
 import org.demo.space.communication.HearingAid
-import org.demo.space.repository.SpaceRepository
-import org.demo.space.domain.Message;
+import org.demo.space.domain.Message
+import org.demo.space.schedule.SpacecraftsRadar;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,11 +14,11 @@ public class SpaceController {
     @Autowired
     HearingAid hearingAid
     @Autowired
-    SpaceRepository spaceRepository
+    SpacecraftsRadar spacecraftsRadar
 
     @RequestMapping("/all-spacecrafts")
     List allSpacecrafts() {
-         spaceRepository.getAllSpacecrafts()
+        spacecraftsRadar.getCurrentSpacecrafts()
     }
 
     @RequestMapping("/answer")

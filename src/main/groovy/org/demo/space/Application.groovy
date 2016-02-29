@@ -7,6 +7,7 @@ import org.springframework.cloud.netflix.eureka.EnableEurekaClient
 import org.springframework.cloud.netflix.feign.EnableFeignClients
 import org.springframework.cloud.netflix.zuul.EnableZuulProxy
 import org.springframework.cloud.netflix.hystrix.dashboard.EnableHystrixDashboard
+import org.springframework.scheduling.annotation.EnableScheduling
 
 @SpringBootApplication
 @EnableDiscoveryClient
@@ -14,6 +15,7 @@ import org.springframework.cloud.netflix.hystrix.dashboard.EnableHystrixDashboar
 @EnableHystrixDashboard
 @EnableEurekaClient
 @EnableFeignClients
+@EnableScheduling
 public class Application {
 
     public static void main(String[] args) {
