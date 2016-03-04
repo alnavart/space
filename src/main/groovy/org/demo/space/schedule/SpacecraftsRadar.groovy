@@ -3,21 +3,27 @@ package org.demo.space.schedule
 import org.demo.space.domain.Event
 import org.demo.space.service.MessageService
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.beans.factory.annotation.Value
 import org.springframework.cloud.client.discovery.DiscoveryClient
 import org.springframework.scheduling.annotation.Scheduled
 import org.springframework.stereotype.Component
 
+import java.util.logging.Logger
+
 @Component
 class SpacecraftsRadar {
 
+    Logger log = Logger.getLogger(this.class.toString())
     @Autowired
     private DiscoveryClient discoveryClient
     @Autowired
     private MessageService messageService
+    @Value('${spring.application.name}')
+    private String myself;
 
     List currentSpacecrafts = []
 
-    @Scheduled(fixedRate = 5000l)
+    @Scheduled(fixedRate = 10000l)
     public void detectSpacecrafts() {
         List newSpacecraftsLecture = readSpacecrafts()
         checkAndNotifyChanges(newSpacecraftsLecture)
@@ -40,6 +46,7 @@ class SpacecraftsRadar {
     }
 
     private void notifyNewSpacecraft(String newSpacecraftName) {
+        log.info("Detected new spacecraft: " + newSpacecraftName)
         Event newSpacecraftEvent = new Event(
                 type: "NEW_SPACECRAFT",
                 data: newSpacecraftName
@@ -53,6 +60,7 @@ class SpacecraftsRadar {
     }
 
     private void notifyDownSpacecraft(String spacecraftDown) {
+        log.info("Detected down spacecraft: " + spacecraftDown)
         Event spacecraftDownEvent = new Event(
                 type: "SPACECRAFT_DOWN",
                 data: spacecraftDown
@@ -61,6 +69,6 @@ class SpacecraftsRadar {
     }
 
     private List<String> readSpacecrafts() {
-        return discoveryClient.getServices()
+        return discoveryClient.getServices() - [myself]
     }
 }
