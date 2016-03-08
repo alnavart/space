@@ -1,9 +1,10 @@
-package org.demo.space.controller;
+package org.demo.space.controller
 
 import org.demo.space.communication.HearingAid
 import org.demo.space.domain.Message
 import org.demo.space.schedule.SpacecraftsRadar;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -15,10 +16,17 @@ public class SpaceController {
     HearingAid hearingAid
     @Autowired
     SpacecraftsRadar spacecraftsRadar
+    @Value('${services.eureka.url}')
+    String eurekaUrl;
 
     @RequestMapping("/all-spacecrafts")
     List allSpacecrafts() {
         spacecraftsRadar.getCurrentSpacecrafts()
+    }
+
+    @RequestMapping("/eureka-url")
+    String eurekaUrl() {
+        eurekaUrl
     }
 
     @RequestMapping("/answer")

@@ -12,6 +12,7 @@ var appspace = {
                 appspace.comms.stompClient.subscribe('/topic/events', rcvEvent, {});
                 appspace.comms.getAllParticipants();
                 appspace.comms.getAllSpacecrafts();
+                appspace.comms.getEurekaServer();
                 appspace.comms.connected = true;
             }, function (error) {
                 appspace.gui.connectionError(error);
@@ -66,6 +67,24 @@ var appspace = {
                 .always(function () {
                     console.log("All spacecrafts complete");
                 })
+        },
+
+        getEurekaServer: function () {
+            $.get("eureka-url", function (data) {
+                console.log('COMMS eureka-url: ' + data);
+                if (appspace.comms.connected == true) {
+                    appspace.gui.showEurekaServerLink(data);
+                }
+            })
+                .done(function () {
+                    console.log("Eureka-url done");
+                })
+                .fail(function () {
+                    console.log("Eureka-url error");
+                })
+                .always(function () {
+                    console.log("Eureka-url complete");
+                })
         }
     },
     ////////////////////////////// GUI ///////////////////////////////////////////
@@ -95,6 +114,7 @@ var appspace = {
             $("#participants").empty();
             $("#history").empty();
             $("#spacecrafts").empty();
+            $("#eureka-link").empty();
             $("#application").hide();
             $("#login").show();
             console.log('Exit: looking to the floor.');
@@ -189,6 +209,12 @@ var appspace = {
                 console.log(spacecrafts[index]);
                 appspace.gui.addSpacecraft(spacecrafts[index]);
             }
+        },
+
+        showEurekaServerLink: function (link) {
+            console.log('GUI: Show eureka server: ' + link);
+            var eurekaLinkElement = $("<a href=" + link + " target='_blank'>" + link + "</a>");
+            $("#eureka-link").append(eurekaLinkElement);
         }
     }
 };
